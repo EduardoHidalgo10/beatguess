@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
+import { MusicBars } from "../../ui/components/music-bars/music-bars";
 
 @Component({
   selector: 'app-home',
-  imports: [],
+  imports: [MusicBars],
   templateUrl: './home.html',
-  styleUrl: './home.css',
 })
 export class Home { }
