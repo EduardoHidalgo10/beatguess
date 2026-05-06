@@ -1,0 +1,12 @@
+<div class="relative z-10 mt-xl grid w-full max-w-7xl grid-cols-2 gap-5 lg:grid-cols-3">
+
+    @for (genre of genresList(); track genre.id) {
+    <div
+        class="group flex min-h-36 cursor-pointer flex-col items-center justify-center gap-sm rounded-[10px] border border-secondary/30 bg-surface-high px-5 py-6 text-center shadow-md transition-all duration-150 hover:border-secondary hover:bg-secondary/10 hover:shadow-lg active:scale-95">
+        <!-- <span
+            class="material-symbols-outlined text-h1 text-secondary transition-transform duration-300 group-hover:scale-110"
+            data-icon="rock_n_roll" aria-hidden="true">{{ genre.picture_medium}}</span> -->
+        <span class="font-label-sm text-label-sm text-on-surface-variant text-2xl font-bold text-center">{{ genre.name }}</span>
+    </div>
+    }
+</div>

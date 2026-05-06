@@ -1,4 +1,4 @@
-<section class="flex flex-col items-center justify-center py-10">
+<section class="relative flex min-h-screen flex-col items-center justify-center py-10">
   <div class="text-center">
     <img src="assets/music.png" alt="Music"
       class="relative z-10 w-1/2 mx-auto rounded-full border-primary border-4
@@ -11,7 +11,7 @@
       BeatGuess
     </h1>
     
-    <p class="text-on-surface-variant font-bold text-2xl">
+    <p class="text-on-surface-variant font-bold text-2xl mt-3">
       Guess the song in 10 seconds. Become a music legend.
     </p>
 
@@ -21,5 +21,10 @@
     </a>
   </div>
 
-  <app-music-bars />
+  
+  <div class="mt-10 z-10 text-center w-full max-w-7xl mx-auto">
+    <app-genre-cards [genresList]="genreResource.value()?.data ?? []" />
+  </div>
+
+  <app-music-bars [barsAmount]="10" />
 </section>

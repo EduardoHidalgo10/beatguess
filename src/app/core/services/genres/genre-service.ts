@@ -8,8 +8,6 @@ import { Observable, of, tap } from 'rxjs';
 })
 export class GenreService {
 
-
-
   http = inject(HttpClient);
   apiUrl = environment.apiUrl;
 

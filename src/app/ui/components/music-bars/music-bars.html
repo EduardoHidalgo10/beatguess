@@ -1,9 +1,11 @@
-<div class="absolute inset-0 z-0 pointer-events-none opacity-20 flex items-end justify-center gap-2 px-5">
-    <div class="bar bar-1 w-4 bg-primary rounded-t-full h-2/5"></div>
-    <div class="bar bar-2 w-4 bg-secondary rounded-t-full h-3/5"></div>
-    <div class="bar bar-3 w-4 bg-primary rounded-t-full h-4/5"></div>
-    <div class="bar bar-4 w-4 bg-secondary rounded-t-full h-3/4"></div>
-    <div class="bar bar-5 w-4 bg-primary rounded-t-full h-4/5"></div>
-    <div class="bar bar-6 w-4 bg-secondary rounded-t-full h-3/5"></div>
-    <div class="bar bar-7 w-4 bg-primary rounded-t-full h-2/5"></div>
-  </div>
+<div
+  class="absolute inset-0 z-0 pointer-events-none opacity-20 flex h-full items-end justify-center gap-2 px-5"
+>
+  @for (bar of bars(); track $index) {
+    <div
+      class="bar w-4 shrink-0 rounded-t-full"
+      [class]="bar.bgClass + ' ' + bar.heightClass"
+      [style.animation-delay.ms]="bar.animationDelayMs"
+    ></div>
+  }
+</div>
