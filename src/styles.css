@@ -1,3 +1,170 @@
-/* You can add global styles to this file, and also import other style files */
-
 @import "tailwindcss";
+
+/* Tokens del design md */
+@theme {
+  --font-display: Inter, ui-sans-serif, system-ui, sans-serif;
+
+  --color-surface: #131313;
+  --color-surface-dim: #131313;
+  --color-surface-bright: #393939;
+
+  --color-surface-container-lowest: #0e0e0e;
+  --color-surface-container-low: #1b1b1b;
+  --color-surface-container: #1f1f1f;
+  --color-surface-container-high: #2a2a2a;
+  --color-surface-container-highest: #353535;
+
+  --color-on-surface: #e2e2e2;
+  --color-on-surface-variant: #cbc3d7;
+
+  --color-outline: #958ea0;
+  --color-outline-variant: #494454;
+
+  --color-primary: #d0bcff;
+  --color-on-primary: #3c0091;
+  --color-primary-container: #a078ff;
+  --color-on-primary-container: #340080;
+
+  --color-secondary: #4cd7f6;
+  --color-on-secondary: #003640;
+  --color-secondary-container: #03b5d3;
+  --color-on-secondary-container: #00424e;
+
+  --color-tertiary: #4edea3;
+  --color-on-tertiary: #003824;
+
+  --color-error: #ffb4ab;
+  --color-on-error: #690005;
+
+  --color-background: #131313;
+  --color-on-background: #e2e2e2;
+
+  --radius-sm: 0.25rem;
+  --radius: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-full: 9999px;
+
+  /* Gradiente “signature” */
+  --gradient-primary: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+}
+
+@layer base {
+  html, body {
+    height: 100%;
+    font-family: var(--font-display);
+    background: var(--color-background);
+    color: var(--color-on-background);
+  }
+}
+
+/* Utilities de diseño (clases listas para usar) */
+@utility bg-surface { background-color: var(--color-surface); }
+@utility bg-surface-low { background-color: var(--color-surface-container-low); }
+@utility bg-surface-high { background-color: var(--color-surface-container-high); }
+@utility text-on-surface { color: var(--color-on-surface); }
+@utility text-on-surface-variant { color: var(--color-on-surface-variant); }
+@utility border-outline { border-color: var(--color-outline); }
+@utility border-outline-variant { border-color: var(--color-outline-variant); }
+
+@utility rounded-lgx { border-radius: var(--radius-lg); }
+@utility rounded-xlx { border-radius: var(--radius-xl); }
+@utility rounded-pill { border-radius: var(--radius-full); }
+
+/* Glassmorphism: card base */
+@utility glass {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+@utility glass-edge {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    0 0 0 1px rgba(0, 0, 0, 0.25);
+}
+
+/* Glow (estado activo / now playing) */
+@utility glow-primary {
+  box-shadow: 0 0 30px rgba(208, 188, 255, 0.15);
+}
+@utility glow-secondary {
+  box-shadow: 0 0 30px rgba(76, 215, 246, 0.15);
+}
+@utility glow-success {
+  box-shadow: 0 0 30px rgba(78, 222, 163, 0.20);
+}
+@utility glow-error {
+  box-shadow: 0 0 30px rgba(255, 180, 171, 0.20);
+}
+
+/* Component-like utilities */
+@utility btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 48px;
+  padding: 0.75rem 1.1rem;
+  border-radius: var(--radius-full);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+@utility btn-primary {
+  background: var(--gradient-primary);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+}
+@utility btn-ghost {
+  background: rgba(255,255,255,0.06);
+  color: var(--color-on-surface);
+  border: 1px solid rgba(255,255,255,0.22);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* Chips */
+@utility chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  padding: 0.45rem 0.9rem;
+  border-radius: var(--radius-full);
+  background: var(--color-surface-container-high);
+  color: var(--color-on-surface);
+  border: 1px solid rgba(255,255,255,0.10);
+}
+@utility chip-selected {
+  background: var(--gradient-primary);
+  color: white;
+  border-color: rgba(255,255,255,0.14);
+}
+
+/* Inputs minimalistas: underline + focus glow */
+@utility input-underline {
+  width: 100%;
+  background: transparent;
+  color: var(--color-on-surface);
+  border: 0;
+  border-bottom: 1px solid rgba(255,255,255,0.22);
+  padding: 0.75rem 0.1rem;
+  outline: none;
+}
+@utility input-underline-focus {
+  border-bottom-color: var(--color-secondary);
+  box-shadow: 0 8px 22px rgba(76, 215, 246, 0.18);
+}
+
+/* Progress bar */
+@utility progress-track {
+  height: 10px;
+  border-radius: var(--radius-full);
+  background: rgba(255,255,255,0.10);
+  overflow: hidden;
+}
+@utility progress-fill {
+  height: 100%;
+  background: var(--color-secondary);
+}
