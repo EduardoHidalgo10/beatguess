@@ -1,22 +1,32 @@
 import { Component, inject } from '@angular/core';
 import { MusicBars } from "../../ui/components/music-bars/music-bars";
-import { RouterLink } from '@angular/router';
-import { GenreService } from '../../core/services/genres/genre-service';
-import { rxResource } from '@angular/core/rxjs-interop';
+import { Router, RouterLink } from '@angular/router';
 import { GenreCards } from "../../ui/components/genre-cards/genre-cards";
+import artistsByGenre from '../../core/data/artists.json';
+import { GenreService } from '../../core/services/genres/genre-service';
 
 @Component({
   selector: 'app-home',
-  imports: [MusicBars, RouterLink, GenreCards],
+  imports: [MusicBars, GenreCards],
   templateUrl: './home.html',
 })
 export class Home { 
-
-  //Imports
   genreService = inject(GenreService);
+  router = inject(Router);
 
 
-  genreResource = rxResource({
-    stream:() => this.genreService.getAllGenres(),
-  })
+  readonly genresFromArtists: string[] = Object.keys(
+    artistsByGenre as Record<string, string[]>
+  );
+
+
+
+  startPlaying() {
+    if (!this.genreService.isGenreSelected()) {
+      alert('Please select a genre before starting the game');
+      return;
+    }
+    
+    this.router.navigate(['/play']);
+  }
 }
