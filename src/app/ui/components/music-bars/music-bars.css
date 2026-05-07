@@ -8,15 +8,7 @@
   will-change: transform;
 }
 
-.bar-1 { animation-delay: 0ms; }
-.bar-2 { animation-delay: 120ms; }
-.bar-3 { animation-delay: 240ms; }
-.bar-4 { animation-delay: 360ms; }
-.bar-5 { animation-delay: 480ms; }
-.bar-6 { animation-delay: 600ms; }
-.bar-7 { animation-delay: 720ms; }
-
 @keyframes barBounce {
-  0%, 100% { transform: scaleY(0.35); }
+  0%, 100% { transform: scaleY(0.55); }
   50% { transform: scaleY(1); }
 }

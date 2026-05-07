@@ -1,4 +1,4 @@
-<section class="flex flex-col items-center justify-center py-10">
+<section class="flex flex-col items-center justify-center py-10 animate-fade-in">
     <div
         class="glass-card neon-glow-purple relative overflow-hidden w-full h-full sm:max-w-2xl md:max-w-4xl rounded-xl p-10 flex flex-col items-center justify-center text-center border-outline-variant border-2 shadow-[0_0_20px_rgba(208,188,255,0.5)]">
         <div class="absolute inset-0 z-0 opacity-10 pointer-events-none">
@@ -13,7 +13,7 @@
         </div>
 
         <div class="relative z-10 mt-5 w-48 h-16 mx-auto">
-            <app-music-bars />
+            <app-music-bars [barsAmount]="6" />
         </div>
 
         <button
@@ -31,6 +31,6 @@
 
 
     <div class="mt-7 w-full max-w-4xl mx-auto px-4">
-        <app-songs-cards />
+        <app-songs-cards  />
     </div>
 </section>
