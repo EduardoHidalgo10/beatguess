@@ -1,12 +1,20 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { environment } from '../../../../environments/environments';
-import { ArtistResponse } from '../../interfaces/artist.interface';
+import { ArtistData, ArtistResponse } from '../../interfaces/artist.interface';
+import { tap } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class ArtistsService {
   private readonly http = inject(HttpClient);
   private readonly apiUrl = environment.apiUrl;
+
+
+
+
+
+  randomArtist = signal<string>('');
+  randomSongs = signal<ArtistData[]>([]);
 
   /**
    * Calls Deezer's search endpoint (`/search`) with the given `q` term.
@@ -16,6 +24,8 @@ export class ArtistsService {
    */
 
   getArtist(artist: string) {
-    return this.http.get<ArtistResponse>(`${this.apiUrl}/search?q=${artist}`);
+    return this.http.get<ArtistResponse>(`${this.apiUrl}/search?q=${artist}`)
+    .pipe(tap((response) => this.randomSongs.set(response.data)),
+    tap(() => console.log(this.randomSongs())));
   }
 }

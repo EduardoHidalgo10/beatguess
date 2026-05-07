@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { Home } from './features/home/home';
 import { AppLayout } from './layout/app-layout/app-layout';
 import { Play } from './features/play/play';
+import { GuessSongsGuard } from './core/guards/guess-songs.guard';
 
 export const routes: Routes = [
     {
@@ -15,6 +16,7 @@ export const routes: Routes = [
             {
                 path: 'play',
                 component: Play,
+                canActivate: [GuessSongsGuard],
             },
         ],
     },

@@ -24,7 +24,7 @@ export interface Album {
     type: string;
 }
 
-export interface Data {
+export interface ArtistData {
     id: number;
     readable: boolean;
     title: string;
@@ -45,7 +45,7 @@ export interface Data {
 }
 
 export interface ArtistResponse {
-    data: Data[];
+    data: ArtistData[];
     total: number;
     next: string;
 }
