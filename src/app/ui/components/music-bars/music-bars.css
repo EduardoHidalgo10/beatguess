@@ -9,6 +9,6 @@
 }
 
 @keyframes barBounce {
-  0%, 100% { transform: scaleY(0.35); }
+  0%, 100% { transform: scaleY(0.55); }
   50% { transform: scaleY(1); }
 }

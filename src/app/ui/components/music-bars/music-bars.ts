@@ -1,13 +1,13 @@
 import { Component, computed, input } from '@angular/core';
 
 const HEIGHT_CLASSES = [
-  'h-2/5',
-  'h-3/5',
   'h-4/5',
-  'h-3/4',
+  'h-5/6',
+  'h-full',
+  'h-5/6',
+  'h-full',
   'h-4/5',
-  'h-3/5',
-  'h-2/5',
+  'h-5/6',
 ] as const;
 
 const STEP_MS = 120;
