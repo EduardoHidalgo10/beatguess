@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { environment } from '../../../../environments/environments';
 import { ArtistData, ArtistResponse } from '../../interfaces/artist.interface';
@@ -25,7 +25,7 @@ export class ArtistsService {
 
   getArtist(artist: string) {
     return this.http.get<ArtistResponse>(`${this.apiUrl}/search?q=${artist}`)
-    .pipe(tap((response) => this.randomSongs.set(response.data)),
-    tap(() => console.log(this.randomSongs())));
+    .pipe(tap((response) => this.randomSongs.set(response.data))
+  );
   }
 }
