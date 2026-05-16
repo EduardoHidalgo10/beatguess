@@ -1,18 +1,10 @@
 <section class="grid w-full grid-cols-2 gap-6 mt-sm">
-    <div
-        class="glass-card flex min-h-28 items-center justify-center font-bold rounded-[10px] border border-secondary/30 px-5 py-8 text-center text-on-surface font-h2 text-xl hover:bg-secondary/10 transition-all active:scale-95 duration-150">
-        Blinding Lights
+    @for (song of songOptions(); track song.id) {
+    <div (click)="selectSong(song)"
+        [class]="cardClasses(song)"
+        [class.pointer-events-none]="wrongSongId() !== null">
+        {{ song.title }}
     </div>
-    <div
-        class="glass-card flex min-h-28 items-center justify-center font-bold rounded-[10px] border border-secondary/30 px-5 py-8 text-center text-on-surface font-h2 text-xl hover:bg-secondary/10 transition-all active:scale-95 duration-150">
-        Starboy
-    </div>
-    <div
-        class="glass-card flex min-h-28 items-center justify-center font-bold rounded-[10px] border border-secondary/30 px-5 py-8 text-center text-on-surface font-h2 text-xl hover:bg-secondary/10 transition-all active:scale-95 duration-150">
-        Save Your Tears
-    </div>
-    <div
-        class="glass-card flex min-h-28 items-center justify-center font-bold rounded-[10px] border border-secondary/30 px-5 py-8 text-center text-on-surface font-h2 text-xl hover:bg-secondary/10 transition-all active:scale-95 duration-150">
-        The Hills
-    </div>
+    }
+   
 </section>
