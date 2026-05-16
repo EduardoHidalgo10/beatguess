@@ -1,59 +1,99 @@
-# Beatguess
+# BeatGuess
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.4.
+BeatGuess is a music guessing game. The player selects a music genre, listens to a 10-second song preview, and must choose the correct title from 4 options. Correct answers increase a streak; wrong ones reset it.
 
-## Development server
+---
 
-To start a local development server, run:
+## Technologies
 
-```bash
-ng serve
+- **Angular 21.1**
+- **TailwindCSS 4**
+- **RxJS 7.8**
+- **Deezer API**
+- **canvas-confetti**
+
+---
+
+## Architecture
+
+The project follows a modular architecture with clear separation of concerns:
+
+```
+src/app/
+├── core/
+│   ├── data/          # Static JSON with artists by genre
+│   ├── guards/        # Route guards
+│   ├── interceptors/  # HTTP interceptor for Deezer dev proxy
+│   ├── interfaces/    # TypeScript models and interfaces
+│   └── services/      # State management and API communication
+├── features/
+│   ├── home/          # Genre selection screen
+│   └── play/          # Main game screen
+├── layout/            # Base visual structure (AppLayout)
+├── shared/            # Shared components (Navbar)
+└── ui/
+    └── components/    # Reusable UI components
+        ├── genre-cards/
+        ├── music-bars/
+        └── songs-cards/
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+### Main layers
 
-## Code scaffolding
+| Layer | Responsibility |
+|---|---|
+| `core/services` | Global application state and HTTP calls |
+| `features` | Pages that orchestrate the game logic |
+| `ui/components` | Presentational components with no business logic |
+| `core/interceptors` | URL rewriting in development to avoid CORS |
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+---
 
-```bash
-ng generate component component-name
+## Signal-Based Architecture
+
+The application is built **entirely on Angular's Signals system**, avoiding the use of `BehaviorSubject` or manual `ChangeDetectionStrategy`.
+
+### Signal types in use
+
+| Signal | Usage in the app |
+|---|---|
+| `signal()` | Mutable local state: active song, audio progress, streak, selected genre |
+| `computed()` | Reactive derivation: generates the 4 answer options from the current song |
+| `input()` | Signal-based component inputs (replaces `@Input()`) |
+| `output()` | Signal-based component outputs (replaces `@Output()`) |
+| `rxResource()` | Bridge between RxJS and signals: reactively loads artist songs |
+
+---
+
+## Music API — Deezer
+
+The application consumes the **[Deezer API](https://developers.deezer.com/api)** through its search endpoint:
+
+```
+GET https://api.deezer.com/search?q={artist}
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Each result includes track metadata (title, duration, cover art) and a **30-second preview URL**. BeatGuess plays only the first **10 seconds** of that preview.
+
+In development, an HTTP interceptor (`deezerDevProxyInterceptor`) rewrites URLs to a local proxy to bypass browser CORS restrictions.
+
+---
+
+## Game Flow
+
+1. The player selects a genre on the home screen.
+2. A random artist is picked from the selected genre (local data from `artists.json`).
+3. The Deezer API is queried with the artist's name to fetch their tracks.
+4. A 10-second preview of a random song starts playing.
+5. The player chooses from 4 options generated reactively with `computed()`.
+6. **Correct** → confetti fires, streak increments, and a new song loads.
+7. **Incorrect** → visual feedback is shown, streak resets, and a new song loads.
+
+---
+
+## Commands
 
 ```bash
-ng generate --help
+npm start       # Start the development server
+npm test        # Run unit tests with Vitest
 ```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
