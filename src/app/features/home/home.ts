@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { MusicBars } from "../../ui/components/music-bars/music-bars";
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { GenreCards } from "../../ui/components/genre-cards/genre-cards";
 import artistsByGenre from '../../core/data/artists.json';
 import { GenreService } from '../../core/services/genres/genre-service';
