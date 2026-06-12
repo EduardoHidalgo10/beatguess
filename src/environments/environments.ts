@@ -1,12 +1,12 @@
 /**
  * Holds app-wide environment values (API base URL, flags).
  *
- * En `ng serve`, el interceptor reescribe `https://api.deezer.com/...` → `/api/deezer/...`.
- * En DevTools verás `http://localhost:4200/api/deezer/genre`; es correcto: Vite (ver `vite.config.mjs`) reenvía
- * esa petición a https://api.deezer.com/genre (mismo endpoint público de Deezer).
+ * The app calls Deezer through the local `/api/deezer` path to avoid browser CORS issues.
+ * - In local development, Vite proxy (see `vite.config.mjs`) forwards `/api/deezer/*` to Deezer.
+ * - In Netlify production, `_redirects` forwards `/api/deezer/*` to Deezer.
  */
 export const environment = {
-  apiUrl: 'https://api.deezer.com',
-  /** Prefijo local; debe coincidir con `server.proxy` en `vite.config.mjs`. */
+  apiUrl: '/api/deezer',
+  /** Local proxy prefix; it must match `server.proxy` in `vite.config.mjs`. */
   deezerDevProxyPrefix: '/api/deezer',
 };
