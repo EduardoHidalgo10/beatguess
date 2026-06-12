@@ -1,5 +1,7 @@
 # BeatGuess
 
+[Live Demo](https://beatguess.netlify.app/)
+
 BeatGuess is a music guessing game. The player selects a music genre, listens to a 10-second song preview, and must choose the correct title from 4 options. Correct answers increase a streak; wrong ones reset it.
 
 ---
